@@ -7,8 +7,8 @@
     >
     <v-dialog
       v-model="dialog"
-      width="65vw"
-      max-width="500px"
+      width="80vw"
+      max-width="430px"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-fade-transition mode="out-in">
@@ -21,23 +21,49 @@
               lg="3"
             >
               <v-img
-                :src="createUrl(item)"
+                :src="createUrl(item.id)"
                 :alt="item.name"
                 aspect-ratio="1"
                 class="grey darken-4"
                 v-bind="attrs"
                 v-on="on"
-                @click="selectModal(createUrl(item))"
+                @click="selectModal(item.id)"
               ></v-img>
             </v-col>
           </v-row>
         </v-fade-transition>
       </template>
+
+      <!-- モーダル部分 -->
+      <div class="modalContainer">
         <v-img
-          :src=selectedImage
+          :src=selectedUrl
           contain
         >
         </v-img>
+      </div>
+        <v-btn
+          class="modal prev"
+          elevation="2"
+          icon
+          large
+          outlined
+          raised
+          @click="selectBtn(-1)"
+        >
+          <v-icon>mdi-chevron-left</v-icon>
+        </v-btn>
+        <v-btn
+          class="modal next"
+          elevation="2"
+          icon
+          large
+          outlined
+          raised
+          @click="selectBtn(1)"
+        >
+          <v-icon>mdi-chevron-right</v-icon>
+        </v-btn>
       </v-dialog>
     </v-container>
   </div>
@@ -47,7 +73,8 @@ export default {
   data() {
     return {
       dialog: false,
-      selectedImage: null,
+      selectedId: null,
+      selectedUrl: null,
       items: [
         {
           id: 1,
@@ -125,12 +152,38 @@ export default {
     }
   },
   methods: {
-    selectModal(url) {
-      this.selectedImage = url
+    // 一覧表示画像のURLを生成
+    createUrl(id) {
+      return '//res.cloudinary.com/komekami/portfolio/'+id+'.jpg'
     },
-    createUrl(image) {
-      return '//res.cloudinary.com/komekami/portfolio/'+image.id+'.jpg'
+    // 選択された画像のidとurlを格納
+    selectModal(id) {
+      this.selectedId = id,
+      this.selectedUrl = '//res.cloudinary.com/komekami/portfolio/'+this.selectedId+'.jpg'
+    },
+    // モーダル時のボタン
+    selectBtn(i) {
+      // 条件判定（最初の画像と最後の画像）
+      if(!((this.selectedId == this.items[0].id && i < 0) || (this.selectedId == this.items[this.items.length-1].id && i > 0))){
+        this.selectedId += i
+        this.selectedUrl = '//res.cloudinary.com/komekami/portfolio/'+this.selectedId+'.jpg'        
+      }
     }
   }
 }
 </script>
+
+<style scoped>
+  .v-btn{
+    position: absolute;  
+    top: 90vh;
+    left: 50%;
+    z-index: 1;
+  }
+  .prev {
+    transform: translateX(-120%);
+  }
+  .next {
+    transform: translateX(20%);
+  }
+</style>

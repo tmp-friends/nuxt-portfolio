@@ -34,6 +34,7 @@
     </v-app-bar>
 
       <nuxt />
+      
     </v-main>
     <v-footer
       color="grey darken-2"
