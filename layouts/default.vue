@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire" :style="{background: $vuetify.theme.dark}" >
+  <v-app id="inspire">
     <v-main
       :style="{width:'90%', margin: '3vh auto'}"
     >
@@ -51,15 +51,21 @@
 </template>
 
 <script>
+import { mdiViewDashboard } from '@mdi/js'
+import { mdiAccount } from '@mdi/js'
+import { mdiImage } from '@mdi/js'
+import { mdiForum } from '@mdi/js'
+
 export default {
   data() {
     return {
+      svgPath: mdiViewDashboard,mdiAccount,mdiImage,mdiForum,
       drawer: null,
       items: [
-        { title: 'Index', icon: 'mdi-view-dashboard', link: '/' },
-        { title: 'Profile', icon: 'mdi-account', link: '/profile' },
-        { title: 'Gallery', icon: 'mdi-image', link: '/gallery' },
-        { title: 'Contact', icon: 'mdi-forum', link: '/contact' }
+        { title: 'Index', icon: mdiViewDashboard, link: '/' },
+        { title: 'Profile', icon: mdiAccount, link: '/profile' },
+        { title: 'Gallery', icon: mdiImage, link: '/gallery' },
+        { title: 'Contact', icon: mdiForum, link: '/contact' }
       ]
     }
   }

@@ -51,7 +51,7 @@
           raised
           @click="selectBtn(-1)"
         >
-          <v-icon>mdi-chevron-left</v-icon>
+          <v-icon>{{ leftIcon }}</v-icon>
         </v-btn>
         <v-btn
           class="modal next"
@@ -62,16 +62,22 @@
           raised
           @click="selectBtn(1)"
         >
-          <v-icon>mdi-chevron-right</v-icon>
+          <v-icon>{{ rightIcon }}</v-icon>
         </v-btn>
       </v-dialog>
     </v-container>
   </div>
 </template>
+
 <script>
+import { mdiChevronLeft } from '@mdi/js'
+import { mdiChevronRight } from '@mdi/js'
+
 export default {
   data() {
     return {
+      leftIcon: mdiChevronLeft,
+      rightIcon: mdiChevronRight,
       dialog: false,
       selectedId: null,
       selectedUrl: null,
