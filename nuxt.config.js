@@ -10,7 +10,14 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'こめかみのポートフォリオサイトです' }
+      { hid: 'description', name: 'description', content: 'こめかみのポートフォリオサイトです' },
+      { hid: 'og:site_name', property: 'og:site_name', content: 'komekami-portfolio' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:url', property: 'og:url', content: '//komekami.info/' },
+      { hid: 'og:title', property: 'og:title', content: 'komekami-portfolio' },
+      { hid: 'og:description', property: 'og:description', content: 'こめかみのポートフォリオサイトです' },
+      { hid: 'og:image', property: 'og:image', content: '//res.cloudinary.com/komekami/portfolio/0.jpg' },
+      { name: 'twitter:card', content: 'summary' },      
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -64,14 +71,14 @@ export default {
   },
 
   purgeCSS: {
-    enabled: process.env.NODE_ENV === 'production',
+    enabled: true,
     paths: [
-      'components/*.vue',
-      'layouts/*.vue',
-      'pages/*.vue',
-      'plugins/*.js',
+      'components/**/*.vue',
+      'layouts/**/*.vue',
+      'pages/**/*.vue',
+      'plugins/**/*.js',
       './node_modules/vuetify/dist/vuetify.js',
-      'assets/*.scss'
+      'assets/**/*.scss'
     ],
     styleExtensions: ['.css'],
     whitelist: ['v-application', 'v-application--wrap', 'layout', 'row', 'col'],
@@ -85,12 +92,12 @@ export default {
       /^text--*/,
       /--text$/,
       /^row-*/,
-      /^col-*/
+      /^col-*/,
     ],
     whitelistPatternsChildren: [/^v-((?!application).)*$/, /^theme--*/],
     extractors: [
       {
-        extractor: (content) => content.match(/[A-z0-9-:\\/]+/g) || [],
+        extractor: content => content.match(/[A-z0-9-:\\/]+/g) || [],
         extensions: ['html', 'vue', 'js']
       }
     ]
