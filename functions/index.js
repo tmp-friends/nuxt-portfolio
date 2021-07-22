@@ -28,7 +28,7 @@ ${data.contents}
 `;
 };
 
-exports.sendMail = functions.region('asia-northeast1').https.onCall(async function(data, context) {
+exports.sendMail = functions.https.onCall(async function(data, context) {
   // メール設定
   let adminMail = {
     // メールヘッダ作成
