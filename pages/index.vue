@@ -15,7 +15,8 @@
           :src="createUrl(item.id)"
           :alt="item.name"
           contain
-        ></v-carousel-item>
+        >
+        </v-carousel-item>
       </v-carousel>
     </v-container>
   </div>

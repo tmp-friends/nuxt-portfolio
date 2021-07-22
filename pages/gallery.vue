@@ -28,7 +28,19 @@
                 v-bind="attrs"
                 v-on="on"
                 @click="selectModal(item.id)"
-              ></v-img>
+              >
+              <template v-slot:placeholder>
+                <v-row
+                  class="fill-height ma-0"
+                  align="center"
+                  justify="center"
+                >
+                  <v-progress-circular
+                    indeterminate
+                  ></v-progress-circular>
+                </v-row>
+              </template>              
+              </v-img>
             </v-col>
           </v-row>
         </v-fade-transition>
